@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object Demo</title>
+    <script type="text/javascript">
+
+        //Object 所有类的基础类
+        //初始化
+
+        var obj = new Object();
+        obj = {
+            age : 10,
+            sex : "man"
+        }
+
+        obj.getPersonInfo = function () {
+            console.log("age=%d, sex=%s", obj.age, obj.sex);
+        }
+
+        console.log(obj);
+        obj.getPersonInfo();
+
+        //delete 操作符  用于删除对象的属性和方法
+        delete obj.age;
+        delete obj.getPersonInfo;
+        console.log(obj);
+
+        //如何去遍历一个Js对象的属性， 可以用 for  in 语句
+        obj = {
+            age: 12,
+            getPersonInfo: function () {
+                alert("hello world!");
+            }
+        };
+
+        for (var attr in obj) {
+            alert(attr + ":" + obj[attr]);  //注意，这里只能用 obj[attr]方式，用 obj.attr得不到结果，这是js的特殊之处
+        }
+
+        //因此， 也可以这样给对象赋值,简单理解就是对象是一个key-value的键值格式
+        obj['work'] = true;
+        console.log(obj);
+
+        alert("----------------");
+
+        //Object对象默认具有下列方法
+        // constructor方法，默认保存对象的构造函数
+        alert(obj.constructor);
+        var arr = [];
+        alert(arr.constructor);
+
+        //hasOwnProperty 方法，检测检查给定的属性在当前的实例中（而不是原型中）是否存在
+        var flag_attr = obj.hasOwnProperty("www");
+        console.log(flag_attr);
+
+        //isProtoTypeOf(Object) 检测原型的方法
+
+        //propertyIsEnumerable 检测给定的属性是否能被for-in语句枚举
+        console.log(obj.propertyIsEnumerable("age"));  //返回  true, 表明  age属性可以被枚举。
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

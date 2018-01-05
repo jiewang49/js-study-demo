@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Funtion Demo2</title>
+    <script type="text/javascript">
+
+        //函数的三种定义方式
+        // function 方式
+        function test1() {
+            console.log("我是test1!");
+        }
+
+        //函数直接量形式， ECMASCRIPT推荐， 即用一个变量接收一个匿名函数
+        var test2 = function () {
+            console.log("我是test2!");
+        }
+
+        //function构造函数式
+        var test3 = new Function("a", "b", "var arr = []; arr.push(a + b); return arr;");
+        console.log("arr:", test3(1, 4));
+
+        //效率比较
+        var d1 = new Date();
+        var t1 = d1.getTime();
+        for (var i = 0; i < 10000; i++) {
+//            function test() {
+//
+//            }                       // funtion语句式  优先解析一次，后面直接使用，静态
+
+            var fun = new Function();  //funtion 构造函数式    每次都会解析一次，使用完后立即释放内存；动态
+        }
+
+        var t2 = new Date().getTime();
+        console.log(t2 - t1);    //function语句式式花费时间1-5ms; function构造函数式时花费 220-240ms之间
+
+        //函数解析顺序
+        //对于 function语句式的函数， JavaScript会优先去解析
+        test4();
+        function test4() {
+            console.log("我是funtion语句式的函数，我会优先执行解析");
+        }
+
+        console.log(test5); //变量声明但未赋值  undefined
+        //test5();  //报错  Uncaught TypeError: test5 is not a function  可简单理解为 也是需要先申明后使用的一个局部变量；而  function语句式则相当于声明了一个全局变量，所以可以随处去使用
+        var test5 = function () {
+            console.log("我是 function直接量的函数，顺序解析");
+        }
+
+        //函数作用域的概念
+        //function语句式和function直接量的函数： 具有函数作用域；而 function构造函数式的函数，具有顶级作用域
+        console.log("-----------------------作用域----------------------");
+        var k = 2;
+        function test6() {
+            var k = 3;
+            function test() {
+                return k;
+            }
+            return test();
+        }
+
+        console.log(test6());   //3
+
+        function test7() {
+            var k = 3;
+            var test = function () {
+                return k;
+            }
+            return test();
+        }
+        console.log(test7());   //3
+
+        function test8() {
+            var k = 3;
+            var test = new Function("return k;");  //这一行语句跟放在函数test8外面没什么区别
+            return test();
+        }
+        console.log(test8());  //2
+    </script>
+</head>
+<body>
+
+</body>
+</html>

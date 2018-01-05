@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Object-excise</title>
+    <script type="text/javascript">
+
+        //和其他高级语言一样javascript中也有new关键字，我们以前认知的new是用来创建一个类的实例对象，但在js中万物皆是对象
+        //用js模拟Java中的Map 类
+        function Map() {
+            console.log("hello, come into function");
+            var obj = {};
+
+            //put方法
+            this.put = function (key, value) {
+                obj[key] = value;
+            }
+
+            //size方法
+            this.size = function () {
+                var count = 0;
+                for (var attr in obj) {
+                    count++;
+                }
+
+                return count;
+            }
+
+            this.get = function (key) {
+                if (obj[key] || obj[key] === 0 || obj[key] === false) {
+                    return obj[key];
+                }else {
+                    return null;
+                }
+
+            }
+
+            this.remove = function (key) {
+                if (obj[key] || obj[key] === 0 || obj[key] === false) {
+                    var ele = obj[key];
+                    delete obj[key];
+                    return ele;
+                }else {
+                    return null;
+                }
+            }
+
+            this.eachMap =function (fn) {
+                for (var attr in obj) {
+                    fn(attr, obj[attr]);
+                }
+            }
+        }
+
+        var map = new Map();
+        map.put("001", "wang");
+        map.put("002", new Date());
+
+        console.log(map);
+        console.log(map.size());
+
+        //get方法
+        console.log(map.get("001"));
+
+        //remove方法
+        map.put("003", "he");
+        var elem = map.remove("003");
+        console.log("elem:", elem);
+
+        //eachMap方法
+
+        map.eachMap(function (key, value) {
+            console.log("key=%s, value=%s", key, value);
+        });
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

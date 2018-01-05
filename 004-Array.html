@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array Demo</title>
+    <script type="text/javascript">
+
+        //Array的  push pop shift 和  unshift方法
+        // push 往数组后面添加元素或数组； pop 从数组后面删除一个元素；shift方法将数组的第一个元素删除；unshift方法将一个元素添加到数组的第一个元素上去
+        //slice  数组截取； splice 数组的添加截取
+//        var arr = [];
+//        arr.push(1, 3);
+//        arr.push(true);
+//
+//        arr.shift();
+//        arr.unshift(new Date());
+//        arr.push(4, 8);
+//        var arr2 = arr.slice(1, 4); //
+//        console.log(arr);
+//        console.log("arr2", arr2);
+//
+//        var arr3 = arr.splice(1, 2, 8, 9, 10);
+//        console.log(arr.reverse());
+
+        //Array concat方法，将两个数组连接
+        var oArr = [ 1 , 2, 3];
+        var oArr2 = [4, new Date()];
+        var oArr3 = oArr.concat(oArr2);
+        console.log(oArr3);
+
+        //Array join方法，把数组中的每个元素连成一个字符串，如给了连字符，则用连字符分割
+        var join = oArr.join('.');
+        console.log(join);
+
+        //Array sort方法， 排序，默认当成字符串排序; reverse方法，将数组倒序
+        var testArr = [3, 7, 2, 6, 9, 0, 5];
+        var testArr2 = [10, 1, 4];
+        testArr.sort();
+        console.log(testArr);
+        console.log(testArr2.sort());  //output: 1  10 4
+        console.log(testArr2.sort(compareByNumber));
+
+        console.log(testArr2.reverse());
+
+
+        function compareByNumber(a, b) {
+            return a <= b ? true: false;
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

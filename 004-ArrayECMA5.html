@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Array-ECMA5</title>
+    <script type="text/javascript">
+
+        //Array 的  indexOf 方法，表示特定字符和特定字符串第一次出现的下标;如果带有第二个参数，则改参数表示开始检索的数组的下标
+        var arr1 = [ 2, 4, 8, 4, 7, 9, 2,7];
+        var index = arr1.indexOf(7);
+        console.log(index);
+
+        var arr2 = ["abc", 2, "bca", "e45", new Date(), "asfaf", "abc", "bca"];
+        var index_str = arr2.indexOf("bca");
+        console.log(index_str);
+
+        var index_with_start_index = arr1.indexOf(4, 3);
+        console.log(index_with_start_index);
+
+        //Array 的lastIndexOF 方法，最后一次出现的下标
+        var index_last = arr2.lastIndexOf("bca");
+        console.log(index_last);
+
+        //数组的几个迭代方法
+        //every 方法， 对数组的每个元素都进行函数的运行，如果每一项返回都为true,则最终结果为true，只要有一项为false，则返回结果为false；
+        var result_every = arr1.every(function (t, number, ts) { return t > 4 });
+        console.log(result_every);
+
+        //filter方法，对数组的每一项进行函数的过滤处理
+        var result_filter = arr1.filter(function (t, number, ts) { return t >= 4; });
+        console.log(result_filter);
+
+        //forEach方法
+        var result_forEach = arr1.forEach(function (t, number, ts) { console.log("index=", number);console.log("value=", t); });
+
+        //map方法,对数组的每一项进行函数运算，返回一个新的数组
+        var result_map = arr1.map(function (t, number, ts) { return  t = 2 * t; });
+        console.log(result_map);
+
+        //some方法，对数组的每一项进行函数的运行，如果有一项返回true，则返回结果为true;否则返回false
+        var result_some = arr1.some(function (t, number, ts) { return t > 4; });
+        console.log(result_some);
+
+        //reduce方法，递归的进行函数的操作
+        // p1: 前一个值； p2: 当前值； number： 当前值所在索引； ts： 当前数组
+        var result_reduce = arr1.reduce(function (p1, p2, number, ts) {
+            return p1 + p2;
+        });
+        console.log(result_reduce);
+
+        //reduce方法，递归的进行函数的操作
+        // 从右边开始执行
+        var result_reduceRight = arr1.reduceRight(function (p1, p2, number, ts) {
+            return p1 + p2;
+        });
+        console.log(result_reduceRight);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

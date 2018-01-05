@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>global</title>
+    <script type="text/javascript">
+        //global对象  全局的终极的兜底的对象（其实是不存在的，无影的对象
+        //该对象包含下列方法
+        //encodeURI encodeURIComponent
+
+        var url = "http://www.baidu.com cn";
+        var str = encodeURI(url);
+        console.log(str);   //http://www.baidu.com%20cn
+        var str2 = encodeURIComponent(url);
+        console.log("str2:", str2);  //str2: http%3A%2F%2Fwww.baidu.com%20cn
+
+        //解码  decodeURI  decodeURIComponent
+        var url1 = decodeURI(str);
+        console.log("url1:", url1);
+        var url2 = decodeURIComponent(str2);
+        console.log("url2:", url2);
+
+        //eval(string) 方法， 相当于一个无形的javascript解析器
+        var eval_str = "var a = 10; var b = 20; var arr = []; arr.push(a, b);";
+        eval(eval_str);
+        console.log('arr:', arr);
+
+        //eval(string) 字符串转对象
+        var eval_str2 = "{name: 'aw', age: 12}";
+        var obj = eval('(' + eval_str2 + ')');  //注意，方法括号里面的小括号表示 对这个字符串进行作用域限制
+        console.log("obj:", obj);
+
+//        var obj2 = eval(eval_str2);  //报错，Uncaught SyntaxError: Unexpected token :
+//        console.log("obj2:", obj2);
+
+        var eval_arr = "[1, 4, 9]";
+        var arr_eval = eval(eval_arr);
+        console.log("arr_eval:", arr_eval);
+
+        //parseInt parseFloat  将字符串解析为number类型
+        var a1 = parseInt('23');
+        var a2 = parseFloat('12.5');
+        alert(typeof a1);
+        alert(typeof a2);
+
+        //escape unescape 转码 和 解码
+        var esca1 = escape('中国');
+        console.log("esca1:", esca1);  //esca1: %u4E2D%u56FD
+        var unesca1 = unescape(esca1);
+        console.log("unesca1:", unesca1);
+
+        //isNaN 如果不是一个number，则为true;否则为 true
+        var isNum1 = isNaN(12345);
+        console.log("isNum1:", isNum1);  //isNum1: false
+        var isNum2 = isNaN(1/0);
+        console.log("isNum2:", isNum2);   //isNum2: false
+        var isNum3 = isNaN("str123");
+        console.log("isNum3:", isNum3);  //isNum3: true
+
+        var isNum4 = isNaN('12345');
+        console.log("isNum4:", isNum4);   //isNum4: false
+
+        //在js里面，只有 NaN 自己不等于自己
+        var flag_NaN = (NaN == NaN);
+        console.log("flag_NaN:", flag_NaN); //flag_NaN: false
+
+
+
+        //Date 日期类型
+        var date = new Date();
+        var year = date.getFullYear();
+        console.log("year:", year);
+        var month = date.getMonth() + 1;
+        var da = date.getDate();
+
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+
+        var day = date.getDay();
+
+        document.write("今天是" + year + "/" + month + "/" + da + " " + hour + ":" + minute + ":" + second + " 星期" + day);
+
+        var millSec = date.getTime();
+        console.log("millSec:", millSec);
+    </script>
+
+
+</head>
+<body>
+
+</body>
+</html>

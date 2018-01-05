@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function1</title>
+    <script type="text/javascript">
+        //简单的函数定义和使用
+        function Add(a, b) {
+            return a + b;
+        }
+
+        var result = Add(5, 9);
+        console.log("result:", result);
+
+        //判断函数 Add 是什么类型
+        console.log(typeof Add);  //function  因此可以说 function 也是一种数据类型，也可以当做参数传入
+
+        function test(test2) {
+            return test2();
+        }
+        function test2() {
+            alert("执行啦！");
+        }
+        test(test2);
+        var result2 = test(Add);
+        console.log("result2:", result2);  //result2: NaN
+
+        var result3 = test(function () {
+            return 7;
+        });
+        console.log("result3:", result3);  //result3: 7
+
+        //函数是可以嵌套的，简单使用如下
+
+        function test3() {
+
+            function test4() {
+                console.log("我是 test4");
+            }
+
+            test4();
+        }
+
+        test3();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
