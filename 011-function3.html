@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function Parameters</title>
+
+    <script type="text/javascript">
+        //function的形参和实参， 个数可以不一致， 函数形参的个数可以通过 函数名的length属性获取
+        function test(a, b, c, d, e) {
+            console.log("形参个数：", test.length);
+
+            //函数的实际参数  函数内部是用一个数组来接收实际传进来的参数；而通过 arguments对象可以访问函数的实际参数
+            console.log("arguments:", arguments);
+            console.log("arguments.length:", arguments.length);
+            console.log("arguments[0]:", arguments[0]);
+
+            //因此可以判断实际传进来的参数和 函数的形参个数是否一致，不一致就报错
+            if (arguments.length === test.length) {
+                return a + b;
+            }else {
+                return "参数不一致";
+            }
+
+
+
+        }
+
+        //console.log(test(1, 4));
+
+        //arguments对象， 用的最多的还是递归操作，见于方法  arguments.callee 指向函数本身
+        //arguments.callee.length 实际上就是 test.length ，函数的形参个数
+        //比如求一个阶乘
+        function fact(num) {
+            if (num <= 1) {
+                return 1;
+            }else {
+                return num * fact(num - 1);
+            }
+        }
+
+        //使用上述方法时 在下列情况下会出现错误
+        var F = fact;
+        fact = null;
+        //alert(F(5));  //报错， Uncaught TypeError: fact is not a function
+
+        //但如果改成这样，就不会报错
+        function fact1(num) {
+            if (num <= 1) {
+                return 1;
+            }else {
+                return num * arguments.callee(num - 1);
+            }
+        }
+        var F1 = fact1;
+        fact1 = null;
+        alert(F1(5));
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

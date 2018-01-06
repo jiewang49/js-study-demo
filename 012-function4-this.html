@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function this </title>
+    <script type="text/javascript">
+        //函数的this对象的理解
+        //this  this对象是指在运行时期基于执行环境所绑定的
+        //注意：  this 总是指向调用者
+
+        var  k = 10;
+
+        function test() {
+            this.k = 30;
+        }
+
+        test();  //该函数执行环境是一个全局环境， 完整写法可以为  window.test()，因此， test()方法执行时， this.k中的this指向的是windown对象
+        alert(k);  //输出 30，覆盖掉了全局的 k = 10
+        alert(test.k);  //undefined
+    </script>
+</head>
+<body>
+
+</body>
+</html>
