@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function Closure</title>
+    <script type="text/javascript">
+        //函数的闭包，必须要首先理解作用域链的概念
+
+        var name = "zhangsan";
+        var obj = {
+            name : "lisi",
+            getName: function () {
+                return function () {
+                    this.name;
+                }
+            }
+        }
+        alert(obj.getName()());
+        console.log(obj.getName()());
+
+        var k = obj.getName();
+        console.log(k());
+        console.log(typeof k);
+        console.log(window.k);
+
+        //
+        var obj = {
+            name : "lisi",
+            getName: function () {
+                //this 总是指向调用者
+                var that = this;
+                return function () {
+                    that.name;
+                }
+            }
+        }
+
+        console.log("----:", obj.getName()());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

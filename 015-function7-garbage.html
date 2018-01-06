@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function garbage</title>
+    <script type="text/javascript">
+
+        //垃圾收集方法 方法1：标记法
+
+        function test() {
+            var a = 10;  //当执行时， 变量a 被标记使用中
+            var b = 20;  //当执行时， 变量b 被标记使用中
+        }
+
+        test();  //执行完毕后，变量  a 和  b会再被标记一次， 没有被使用， 因此垃圾回收机制就会回收 变量 a 和  b
+
+        //方法2: 引用计数法
+
+        //javascript没有块级作用域的概念，不用高级语言C  Java中 for if 等语句有块作用域概念
+        function test2() {
+            for (var k = 0; k <= 10; k++) {
+                console.log("k=", k);
+            }
+
+            alert(k);  // 11
+        }
+
+        test2();
+
+        //那js如何去模式块级作用域的概念呢？ 可以用一对小括号()将函数定义括起来
+        function test3() {
+            (function() {
+                for (var i = 0; i <= 10; i++) {
+                    console.log("i=", i);
+                }
+            })();             //注意：这里用一堆小括号将匿名函数括起来，表示生成一个执行环境，一个单独作用域，然后要让函数执行则在后面再加上一堆小括号，表示立即执行。
+
+            alert(i);  // Uncaught ReferenceError: i is not defined
+        }
+
+        test3();
+   </script>
+</head>
+<body>
+
+</body>
+</html>
