@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oop1 Demo</title>
+    <script type="text/javascript">
+
+        //javascript如何模式类的概念
+
+        //第一种方式： 工厂模式
+
+        function createPerson(name, sex, age) {
+            var obj = new Object();
+            obj.name = name;
+            obj.sex = sex;
+            obj.age = age;
+            obj.getName = function() {
+                return this.name;
+            }
+
+            return obj;
+        }
+
+        var p1 = createPerson("zhangsan", "man", 14);
+        var p2 = createPerson("lili", "woman", 34);
+        console.log(p1);
+
+
+        //第二种方式：  构造函数式
+        //约定俗称第一个字母大写表示类的概念
+        function Person(name, sex, age) {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.getName = function () {
+                return this.name;
+            }
+        }
+
+        var p3 = new Person("lucy", "woman", 18);
+        var p4 = new Person("lucy2", "man", 18);
+        console.log(p3.getName());
+
+
+        console.log(p3 == p4);  //false
+
+        console.log(p3.constructor == Person); //true
+        console.log(p4.constructor == Person); //true
+
+        console.log(p3 instanceof Person); //true
+        console.log(p3 instanceof Object); //true
+
+
+        //创建对象的方式
+        //1 当做构造函数去创建
+        var p5 = new Person("xiao", "man", 39);
+        //2 当做普通函数去使用
+        Person("xiao2", "woman", 35);   //注意：这里实际上是 window.Person("xiao2", "woman", 35) 在全局环境里定义属性，this 指的就是 window对象
+        console.log(name);  // xiao2
+
+        //3 在另一个对象的作用域中去使用， call apply
+        var ob = new Object();
+        Person.call(ob, "xiao3", "man", 39);
+        console.log(ob.getName()); //xiao3
+    </script>
+</head>
+<body>
+
+</body>
+</html>

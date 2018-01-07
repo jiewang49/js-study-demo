@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProtoType</title>
+    <script type="text/javascript">
+        
+        //首先看下构造函数式
+        
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.getName = function () {
+                alert("wo shi !");
+            }
+        }
+
+        var p1 = new Person("ZHANSAN", 14);
+        var p2 = new Person("lisi", 20);
+        console.log(p1.getName == p2.getName); //false 这说明每 new 一次，创建一个对象时都会创建一次 getName函数，所以二者不一样
+        console.log(p1.name == p2.name); // false
+
+        //改成如下这样
+        function Person2(name, age) {
+            this.name = name;
+            this.age = age;
+            this.getName = getName;
+        }
+
+        function getName() {
+            alert("wo shi !");
+        }
+
+        var p3 = new Person2("ZHANSAN", 14);
+        var p4 = new Person2("lisi", 20);
+        console.log(p3.getName == p4.getName); //true 这里 方法getName放在全局域里，只会解析一次；但是有一个不好的地方，那就是这个全局方法时专属于类Person的方法
+        console.log(p3.name == p4.name); // false
+
+        //因此，要解决上述问题，就涉及到 原型 prototype的概念
+        //原型 prototype： 创建一个函数时都会包含一个prototype属性，这个属性其实是一个指针，这个指针总指向一个对象，该对象的用途就是将特定的属性和方法包含在内，起到一个所有实例共享的作用
+
+        function Peron3(age) {
+            this.age = age;
+        }
+
+        var obj3 = Peron3.prototype;
+        obj3.name = "zhangu";
+        obj3.getName = function () {
+            return this.name;
+        }
+
+        var p5 = new Peron3(18);
+        var p6 = new Peron3(20);
+
+        console.log(p5.getName == p6.getName);  //true
+        console.log(p5.name);  //zhanggu
+        console.log(p5.getName());  //zhanggu
+        console.log(p5.age == p6.age); //false
+
+        //构造函数 原型对象  实例对象
+        // 构造函数.prototype = 原型对象
+        //原型对象.constructor = 构造函数
+        console.log(obj3.constructor);
+
+        //原型对象.isPrototypeOf(实例对象)
+        console.log(obj3.isPrototypeOf(p5)) //true  对象p5是 obj3的一个原型
+    </script>
+</head>
+<body>
+
+</body>
+</html>
